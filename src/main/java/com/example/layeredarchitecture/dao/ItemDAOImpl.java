@@ -46,7 +46,7 @@ public class ItemDAOImpl {
     public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
 
 
-        return CRUDUtil.execute("DELETE FROM Item WHERE code=?");
+        return CRUDUtil.execute("DELETE FROM Item WHERE code=?",code);
         /* pstm.setString(1, code);
         pstm.executeUpdate();*/
 //        int rs = ptsm.executeUpdate();
