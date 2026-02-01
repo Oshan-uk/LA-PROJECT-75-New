@@ -42,6 +42,7 @@ public class ManageItemsFormController {
     public TextField txtUnitPrice;
     public JFXButton btnAddNewItem;
 
+    //Property Injection
     ItemDAO itemDAO = new ItemDAOImpl();
 
 
