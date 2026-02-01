@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ItemDAOImpl {
+public class ItemDAOImpl implements ItemDAO {
+
+    @Override
     public ArrayList<ItemDTO> loadAllItems() throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        Statement stm = connection.createStatement();
@@ -27,6 +29,7 @@ public class ItemDAOImpl {
 
     }
 
+    @Override
     public void saveItem(String code, String description, BigDecimal unitPrice, int qtyOnHand) throws SQLException, ClassNotFoundException {
 //            Connection connection = DBConnection.getDbConnection().getConnection();
 //            PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
@@ -38,11 +41,13 @@ public class ItemDAOImpl {
         CRUDUtil.execute("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)", code, description, unitPrice, qtyOnHand);
     }
 
+    @Override
     public boolean updateItem(String code, String description, BigDecimal unitPrice, int qtyOnHand) throws SQLException, ClassNotFoundException {
 
         return CRUDUtil.execute("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?", description, unitPrice, qtyOnHand, code);
     }
 
+    @Override
     public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
 
 
@@ -55,7 +60,7 @@ public class ItemDAOImpl {
 
     }
 
-
+    @Override
     public boolean existsItem(String itemCode) throws SQLException, ClassNotFoundException {
 //            Connection connection = DBConnection.getDbConnection().getConnection();
 //
@@ -66,6 +71,7 @@ public class ItemDAOImpl {
         return rs.next();
     }
 
+    @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
@@ -80,6 +86,7 @@ public class ItemDAOImpl {
         }
     }
 
+    @Override
     public ItemDTO findItem(String itemCode) throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
@@ -97,6 +104,7 @@ public class ItemDAOImpl {
         }
         return null;
     }
+
 }
 
 

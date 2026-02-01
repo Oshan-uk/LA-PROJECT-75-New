@@ -6,8 +6,9 @@ import com.example.layeredarchitecture.model.OrderDTO;
 import java.sql.*;
 import java.time.LocalDate;
 
-public class OrderDAOImpl {
+public class OrderDAOImpl implements OrderDAO {
 
+    @Override
     public String generateNewOrderId() throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        Statement stm = connection.createStatement();
@@ -17,8 +18,9 @@ public class OrderDAOImpl {
                 (Integer.parseInt(rst.getString("oid")
                         .replace("OID-", "")) + 1)) : "OID-001";
     }
-    public boolean exitsOrder(String orderId) throws SQLException,
-            ClassNotFoundException {
+
+    @Override
+    public boolean exitsOrder(String orderId) throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        PreparedStatement stm = connection
 //                .prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
@@ -27,8 +29,9 @@ public class OrderDAOImpl {
         ResultSet rst = CRUDUtil.execute("SELECT oid FROM `Orders` WHERE oid=?",orderId);
         return  rst.next();
     }
-    public boolean saveOrder(String orderId, LocalDate orderDate,String customerId)
-            throws SQLException, ClassNotFoundException {
+
+    @Override
+    public boolean saveOrder(String orderId, LocalDate orderDate,String customerId) throws SQLException, ClassNotFoundException {
 //        Connection connection = DBConnection.getDbConnection().getConnection();
 //        PreparedStatement stm = connection.prepareStatement
 //                ("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
@@ -40,4 +43,5 @@ public class OrderDAOImpl {
         return CRUDUtil.execute("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)",orderId,orderDate,customerId);
 
     }
+
 }
