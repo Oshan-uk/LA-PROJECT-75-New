@@ -43,13 +43,16 @@ public class ItemDAOImpl {
         return CRUDUtil.execute("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?", description, unitPrice, qtyOnHand, code);
     }
 
-    public boolean deleteItem(String code)
-            throws SQLException, ClassNotFoundException {
+    public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
 
-        return CRUDUtil.execute(
-                "DELETE FROM Item WHERE code=?",
-                code.trim()
-        );
+
+        return CRUDUtil.execute("DELETE FROM Item WHERE code=?");
+        /* pstm.setString(1, code);
+        pstm.executeUpdate();*/
+//        int rs = ptsm.executeUpdate();
+
+
+
     }
 
 
@@ -59,7 +62,8 @@ public class ItemDAOImpl {
 //            PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
 //            pstm.setString(1, itemCode);
 //            return pstm.executeQuery().next();
-        return CRUDUtil.execute("SELECT code FROM Item WHERE code=?", itemCode);
+        ResultSet rs = CRUDUtil.execute("SELECT code FROM Item WHERE code=?", itemCode);
+        return rs.next();
     }
 
     public String generateNewId() throws SQLException, ClassNotFoundException {
