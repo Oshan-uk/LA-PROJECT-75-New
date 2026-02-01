@@ -79,7 +79,7 @@ public class ManageItemsFormController {
     private void loadAllItems() {
         tblItems.getItems().clear();
         try {
-//            ItemDAO itemDAOImpl = new ItemDAOImpl();
+//          ItemDAO itemDAOImpl = new ItemDAOImpl();
             itemDAO.loadAllItems() ;
             ArrayList<ItemDTO> ItemDTOArrayList=itemDAO.loadAllItems();
             for (ItemDTO itemDTO : ItemDTOArrayList) {
