@@ -1,3 +1,4 @@
+
 package com.example.layeredarchitecture.controller;
 
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
@@ -37,7 +38,6 @@ public class ManageCustomersFormController {
     public TextField txtCustomerAddress;
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
-
     //property injection
     CustomerDAO customerDAO = new CustomerDAOImpl();
 
@@ -46,7 +46,7 @@ public class ManageCustomersFormController {
         tblCustomers.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
         tblCustomers.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("address"));
 
-
+        initUI();
 
         tblCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             btnDelete.setDisable(newValue == null);
@@ -66,8 +66,6 @@ public class ManageCustomersFormController {
 
         txtCustomerAddress.setOnAction(event -> btnSave.fire());
         loadAllCustomers();
-
-        initUI();
     }
 
     private void loadAllCustomers() {
@@ -149,8 +147,8 @@ public class ManageCustomersFormController {
                 if (existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
-            //tight coupling--->Loose couple
-                customerDAO.saveCustomer(id, name, address);
+                //tight coupling--->Loose couple
+                customerDAO.saveCustomer(new CustomerDTO(id, name, address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
             } catch (SQLException e) {
@@ -167,7 +165,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
                 //tight coupling--->Loose couple
-                customerDAO.updateCustomer(id,name,address);
+                customerDAO.updateCustomer(new CustomerDTO(id, name, address));
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
@@ -215,7 +213,7 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-           return customerDAO.generateNewID();
+            return customerDAO.generateNewID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
         } catch (ClassNotFoundException e) {

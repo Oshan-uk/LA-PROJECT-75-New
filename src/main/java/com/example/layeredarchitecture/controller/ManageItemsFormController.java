@@ -194,7 +194,7 @@ public class ManageItemsFormController {
                 ItemDTO itemDTO = new ItemDTO(code, description, unitPrice, qtyOnHand);
 
 //              ItemDAO itemDAO = new ItemDAOImpl();
-                itemDAO.saveItem(code,description,unitPrice,qtyOnHand);
+                itemDAO.saveItem(new ItemDTO(code, description, unitPrice, qtyOnHand));
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
             } catch (SQLException e) {
@@ -212,7 +212,7 @@ public class ManageItemsFormController {
                 ItemDTO itemDTO = new ItemDTO(code, description, unitPrice, qtyOnHand);
 
 //              ItemDAO itemDAO = new ItemDAOImpl();
-                itemDAO.updateItem(code,description,unitPrice,qtyOnHand);
+                itemDAO.updateItem(new ItemDTO(code, description, unitPrice, qtyOnHand));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
                 selectedItem.setDescription(description);

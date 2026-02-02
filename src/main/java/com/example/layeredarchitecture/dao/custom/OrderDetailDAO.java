@@ -5,8 +5,5 @@ import com.example.layeredarchitecture.model.OrderDetailDTO;
 import java.sql.SQLException;
 
 public interface OrderDetailDAO {
-
-    public boolean saveOrderDetails(OrderDetailDTO orderDetailDTO) throws SQLException, ClassNotFoundException ;
-
-
+    public boolean saveOrderDetails(OrderDetailDTO orderDetailDTO) throws SQLException, ClassNotFoundException;
 }

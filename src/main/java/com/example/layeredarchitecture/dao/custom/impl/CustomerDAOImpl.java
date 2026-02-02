@@ -1,9 +1,10 @@
-package com.example.layeredarchitecture.dao.custom.impl;
 
+package com.example.layeredarchitecture.dao.custom.impl;
 
 
 import com.example.layeredarchitecture.dao.CRUDUtil;
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
+import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
 
 import java.sql.*;
@@ -24,27 +25,16 @@ public class CustomerDAOImpl implements CustomerDAO {
         return customers;
     }
     @Override
-    public boolean saveCustomer(String id, String name, String address) throws SQLException, ClassNotFoundException {
-        return CRUDUtil.execute("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",id,name,address);
+    public boolean saveCustomer(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
+        return CRUDUtil.execute("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",customerDTO.getId(),customerDTO.getName(),customerDTO.getAddress());
     }
     @Override
-    public boolean updateCustomer(String id, String name, String address) throws SQLException, ClassNotFoundException {
-//        Connection connection = DBConnection.getDbConnection().getConnection();
-//        PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET name=?, address=? WHERE id=?");
-//        pstm.setString(1, name);
-//        pstm.setString(2, address);
-//        pstm.setString(3, id);
-//        pstm.executeUpdate();
-        return  CRUDUtil.execute("UPDATE Customer SET name=?, address=? WHERE id=?",id,name,address);
+    public boolean updateCustomer(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
+        return CRUDUtil.execute("UPDATE Customer SET name=?, address=? WHERE id=?",customerDTO.getName(),customerDTO.getAddress(),customerDTO.getId());
     }
     @Override
     public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
-//        Connection connection = DBConnection.getDbConnection().getConnection();
-//        PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
-//        pstm.setString(1, id);
-//        pstm.executeUpdate();
         return CRUDUtil.execute("DELETE FROM Customer WHERE id=?",id);
-
     }
     @Override
     public String generateNewID() throws SQLException, ClassNotFoundException {
