@@ -3,7 +3,7 @@ package com.example.layeredarchitecture.dao;
 import com.example.layeredarchitecture.model.ItemDTO;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
