@@ -1,4 +1,3 @@
-
 package com.example.layeredarchitecture.controller;
 
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
@@ -73,7 +72,7 @@ public class ManageCustomersFormController {
         /*Get all customers*/
         try {
             //tight coupling--->Loose couple
-            ArrayList<CustomerDTO> customerDTOArrayList=customerDAO.getAllCustomers();
+            ArrayList<CustomerDTO> customerDTOArrayList=customerDAO.getAll();
 
             for (CustomerDTO customerDTO : customerDTOArrayList) {
                 tblCustomers.getItems().add(new CustomerTM(
@@ -148,7 +147,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
                 //tight coupling--->Loose couple
-                customerDAO.saveCustomer(new CustomerDTO(id, name, address));
+                customerDAO.save(new CustomerDTO(id, name, address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
             } catch (SQLException e) {
@@ -165,7 +164,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
                 //tight coupling--->Loose couple
-                customerDAO.updateCustomer(new CustomerDTO(id, name, address));
+                customerDAO.update(new CustomerDTO(id, name, address));
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
@@ -185,7 +184,7 @@ public class ManageCustomersFormController {
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
         //tight coupling--->Loose couple
-        return customerDAO.existCustomer(id);
+        return customerDAO.exists(id);
     }
 
 
@@ -198,7 +197,7 @@ public class ManageCustomersFormController {
             }
             //tight coupling--->Loose couple
 
-            customerDAO.deleteCustomer(id);
+            customerDAO.delete(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
             tblCustomers.getSelectionModel().clearSelection();
