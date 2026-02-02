@@ -22,6 +22,7 @@ public class CustomerDAOImpl implements CustomerDAO{
             customers.add(customerDTO);
         }
         return customers;
+
     }
     @Override
     public boolean save(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {

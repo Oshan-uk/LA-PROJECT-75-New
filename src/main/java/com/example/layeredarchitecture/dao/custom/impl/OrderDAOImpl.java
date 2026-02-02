@@ -29,10 +29,6 @@ public class OrderDAOImpl implements OrderDAO {
         return null;
     }
 
-    public boolean exits(String orderId) throws SQLException, ClassNotFoundException {
-        ResultSet rst= CRUDUtil.execute("SELECT oid FROM `Orders` WHERE oid=?", orderId);
-        return rst.next();
-    }
 
     @Override
     public ArrayList<OrderDTO> getAll() throws SQLException, ClassNotFoundException {
