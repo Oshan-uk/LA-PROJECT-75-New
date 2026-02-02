@@ -1,6 +1,7 @@
-package com.example.layeredarchitecture.dao;
+package com.example.layeredarchitecture.dao.custom.impl;
 
 
+import com.example.layeredarchitecture.dao.CRUDUtil;
 import com.example.layeredarchitecture.dao.custom.ItemDAO;
 import com.example.layeredarchitecture.model.ItemDTO;
 
@@ -30,7 +31,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public void saveItem(String code, String description, BigDecimal unitPrice, int qtyOnHand) throws SQLException, ClassNotFoundException {
+    public boolean saveItem(String code, String description, BigDecimal unitPrice, int qtyOnHand) throws SQLException, ClassNotFoundException {
 //            Connection connection = DBConnection.getDbConnection().getConnection();
 //            PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
 //            pstm.setString(1, itemDTO.getCode());
@@ -38,7 +39,7 @@ public class ItemDAOImpl implements ItemDAO {
 //            pstm.setBigDecimal(3, itemDTO.getUnitPrice());
 //            pstm.setInt(4, itemDTO.getQtyOnHand());
 //            pstm.executeUpdate();
-        CRUDUtil.execute("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)", code, description, unitPrice, qtyOnHand);
+        return CRUDUtil.execute("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)", code, description, unitPrice, qtyOnHand);
     }
 
     @Override
