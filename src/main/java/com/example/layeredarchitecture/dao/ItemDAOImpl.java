@@ -1,6 +1,7 @@
 package com.example.layeredarchitecture.dao;
 
 
+import com.example.layeredarchitecture.dao.custom.ItemDAO;
 import com.example.layeredarchitecture.model.ItemDTO;
 
 import java.math.BigDecimal;
