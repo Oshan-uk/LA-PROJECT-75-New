@@ -68,6 +68,20 @@ public class ManageCustomersFormController {
         loadAllCustomers();
     }
 
+    private void initUI() {
+        txtCustomerId.clear();
+        txtCustomerName.clear();
+        txtCustomerAddress.clear();
+        txtCustomerId.setDisable(true);
+        txtCustomerName.setDisable(true);
+        txtCustomerAddress.setDisable(true);
+        txtCustomerId.setEditable(false);
+        btnSave.setDisable(true);
+        btnDelete.setDisable(true);
+    }
+
+
+
     private void loadAllCustomers() {
         tblCustomers.getItems().clear();
         /*Get all customers*/
@@ -88,17 +102,8 @@ public class ManageCustomersFormController {
         }
     }
 
-    private void initUI() {
-        txtCustomerId.clear();
-        txtCustomerName.clear();
-        txtCustomerAddress.clear();
-        txtCustomerId.setDisable(true);
-        txtCustomerName.setDisable(true);
-        txtCustomerAddress.setDisable(true);
-        txtCustomerId.setEditable(false);
-        btnSave.setDisable(true);
-        btnDelete.setDisable(true);
-    }
+
+
 
     @FXML
     private void navigateToHome(MouseEvent event) throws IOException {
@@ -124,7 +129,6 @@ public class ManageCustomersFormController {
         btnSave.setText("Save");
         tblCustomers.getSelectionModel().clearSelection();
     }
-
 
     public void btnSave_OnAction(ActionEvent actionEvent) {
         String id = txtCustomerId.getText();
@@ -183,11 +187,11 @@ public class ManageCustomersFormController {
     }
 
 
+
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
         //tight coupling--->Loose couple
         return customerBO.existCustomer(id);
     }
-
 
     public void btnDelete_OnAction(ActionEvent actionEvent) {
         /*Delete Customer*/
