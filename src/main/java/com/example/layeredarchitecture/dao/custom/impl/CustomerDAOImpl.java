@@ -28,14 +28,17 @@ public class CustomerDAOImpl implements CustomerDAO{
     public boolean save(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
         return CRUDUtil.execute("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",customerDTO.getId(),customerDTO.getName(),customerDTO.getAddress());
     }
+
     @Override
     public boolean update(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
         return CRUDUtil.execute("UPDATE Customer SET name=?, address=? WHERE id=?",customerDTO.getName(),customerDTO.getAddress(),customerDTO.getId());
     }
+
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
         return CRUDUtil.execute("DELETE FROM Customer WHERE id=?",id);
     }
+
     @Override
     public String generateNewID() throws SQLException, ClassNotFoundException {
         ResultSet rst =CRUDUtil.execute("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
@@ -47,12 +50,14 @@ public class CustomerDAOImpl implements CustomerDAO{
             return "C00-001";
         }
     }
+
     @Override
     public boolean exists(String id) throws SQLException, ClassNotFoundException {
         ResultSet rst=CRUDUtil
                 .execute("SELECT * FROM Customer WHERE id=?", id);
         return rst.next();
     }
+
     @Override
     public CustomerDTO find(String id) throws SQLException, ClassNotFoundException {
         ResultSet rst = CRUDUtil.execute("SELECT * FROM Customer WHERE id=?",id);
