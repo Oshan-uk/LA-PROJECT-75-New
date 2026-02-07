@@ -60,7 +60,7 @@ public class PlaceOrderFormController {
     public Label lblTotal;
     private String orderId;
 
-    //    CustomerDAO customerDAO=new CustomerDAOImpl();
+//    CustomerDAO customerDAO=new CustomerDAOImpl();
 //    ItemDAO itemDAO=new ItemDAOImpl();
 //    OrderDAO orderDAO=new OrderDAOImpl();
 //    OrderDetailDAO orderDetailDAO=new OrderDetailDAOImpl();
@@ -194,14 +194,6 @@ public class PlaceOrderFormController {
         loadAllItemCodes();
     }
 
-    private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        return itemBO.existItem(code);
-    }
-
-    boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        return customerBO.existCustomer(id);
-    }
-
 
     public String generateNewOrderId() {
         try {
@@ -242,6 +234,7 @@ public class PlaceOrderFormController {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void navigateToHome(MouseEvent event) throws IOException {
@@ -331,6 +324,15 @@ public class PlaceOrderFormController {
         calculateTotal();
     }
 
+
+    private boolean existItem(String code) throws SQLException, ClassNotFoundException {
+        return itemBO.existItem(code);
+    }
+
+    boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
+        return customerBO.existCustomer(id);
+    }
+
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) {
         /*Transaction*/
         Connection connection = null;
@@ -383,7 +385,6 @@ public class PlaceOrderFormController {
         }
         return false;
     }
-
 
     public ItemDTO findItem(String code) {
         try {

@@ -38,7 +38,8 @@ public class ManageItemsFormController {
     public TableView<ItemTM> tblItems;
     public TextField txtUnitPrice;
     public JFXButton btnAddNewItem;
-   // ItemDAO itemDAO = new ItemDAOImpl();
+
+    // ItemDAO itemDAO = new ItemDAOImpl();
 
     ItemBO itemBO = new ItemBOImpl();
 
@@ -72,6 +73,21 @@ public class ManageItemsFormController {
         loadAllItems();
     }
 
+    private void initUI() {
+        txtCode.clear();
+        txtDescription.clear();
+        txtUnitPrice.clear();
+        txtQtyOnHand.clear();
+        txtCode.setDisable(true);
+        txtDescription.setDisable(true);
+        txtUnitPrice.setDisable(true);
+        txtQtyOnHand.setDisable(true);
+        txtCode.setEditable(false);
+        btnSave.setDisable(true);
+        btnDelete.setDisable(true);
+    }
+
+
     private void loadAllItems() {
         tblItems.getItems().clear();
         try {
@@ -91,19 +107,6 @@ public class ManageItemsFormController {
         }
     }
 
-    private void initUI() {
-        txtCode.clear();
-        txtDescription.clear();
-        txtUnitPrice.clear();
-        txtQtyOnHand.clear();
-        txtCode.setDisable(true);
-        txtDescription.setDisable(true);
-        txtUnitPrice.setDisable(true);
-        txtQtyOnHand.setDisable(true);
-        txtCode.setEditable(false);
-        btnSave.setDisable(true);
-        btnDelete.setDisable(true);
-    }
 
     @FXML
     private void navigateToHome(MouseEvent event) throws IOException {
@@ -223,6 +226,7 @@ public class ManageItemsFormController {
     }
 
 
+
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
 
         return itemBO.existItem(code);
@@ -240,4 +244,5 @@ public class ManageItemsFormController {
         }
         return "I00-001";
     }
+
 }
