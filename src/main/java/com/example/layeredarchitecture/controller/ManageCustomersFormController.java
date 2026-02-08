@@ -81,7 +81,6 @@ public class ManageCustomersFormController {
     }
 
 
-
     private void loadAllCustomers() {
         tblCustomers.getItems().clear();
         /*Get all customers*/
@@ -101,7 +100,6 @@ public class ManageCustomersFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
 
 
@@ -186,13 +184,6 @@ public class ManageCustomersFormController {
         btnAddNewCustomer.fire();
     }
 
-
-
-    boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        //tight coupling--->Loose couple
-        return customerBO.existCustomer(id);
-    }
-
     public void btnDelete_OnAction(ActionEvent actionEvent) {
         /*Delete Customer*/
         String id = tblCustomers.getSelectionModel().getSelectedItem().getId();
@@ -213,6 +204,13 @@ public class ManageCustomersFormController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
+        //tight coupling--->Loose couple
+        return customerBO.existCustomer(id);
     }
 
     private String generateNewId() {
